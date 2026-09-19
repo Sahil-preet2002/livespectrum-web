@@ -316,8 +316,9 @@ body:has([data-ffh-hover-happy]:hover) .ffh-sun .sun__face-svg > *:nth-child(6) 
   .ffh-h2-box { border-width: 0.175em; }
 }
 @media screen and (max-width: 767px) {
-  .ffh-h2 { font-size: 3em; white-space: nowrap; }
-  .ffh-h2-box { border-width: 0.1em; }
+  /* copy is longer than the reference, so let the sticker wrap instead of forcing the page wider */
+  .ffh-h2 { font-size: 2.6em; white-space: normal; }
+  .ffh-h2-box { border-width: 0.1em; max-width: 100%; }
 }
 
 /* ------------------------------ Stacked cards ------------------------------ */

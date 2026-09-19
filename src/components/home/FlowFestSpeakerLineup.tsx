@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { CURSOR_POINTER_SVG } from "./heroSvgs";
 import { artists } from "@/data/artists";
+import { appearancesFor } from "@/data/appearances";
 import "./hero.css";
 import "./sections.css";
 
@@ -38,12 +39,27 @@ const SPEAKERS: Speaker[] = LINEUP.flatMap(({ name, col }) => {
       tag: a.category === "Theater & Cinema" ? "Theatre" : a.category,
       image: a.img,
       col,
-      bio: (
-        <>
-          <strong>{a.name}</strong> — {a.role}. Featured in <strong>{a.tagline}</strong>, live with LiveSpectrum
-          Entertainment in North Carolina.
-        </>
-      ),
+      bio: (() => {
+        const apps = appearancesFor(a.name);
+        return (
+          <>
+            <strong>{a.name}</strong>
+            {apps.length > 0 ? (
+              <>
+                {" "}
+                at LiveSpectrum:{" "}
+                {apps
+                  .slice(0, 2)
+                  .map((p) => `${p.title} (${p.year})`)
+                  .join(", ")}
+                .
+              </>
+            ) : (
+              <> — promoted by LiveSpectrum Entertainment.</>
+            )}
+          </>
+        );
+      })(),
     },
   ];
 });

@@ -94,9 +94,22 @@
   .ffx-grid__cell:nth-child(even) { transform: translateY(2.5em); }
 }
 @media screen and (max-width: 767px) {
-  .ffx-grid { grid-template-columns: 1fr; padding-left: 1.5em; padding-right: 1.5em; }
-  .ffx-grid__cell:nth-child(even) { transform: none; }
+  /* two compact columns on phones so the 57 artists don't turn into a 30,000px page */
+  .ffx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.75em 0.9em; padding: 2em 0.25em 3em; }
+  .ffx-grid__cell:nth-child(even) { transform: translateY(1.5em); }
+  .ffx-artist .ffs-card__tag { height: 2.1em; padding: 0 0.6em; font-size: 0.8em; }
+  .ffx-artist .ffs-card__bio { width: calc(100% - 1.25em); padding: 0.9em 0.6em; }
+  .ffx-name { font-size: 1.1em; }
+  .ffx-apps { font-size: 0.72em; }
+  .ffx-apps li:nth-child(n + 2) { display: none; }
+  .ffx-muted { font-size: 0.72em; }
+  .ffx-link { font-size: 0.85em; }
+  .ffx-artist .ffs-corner { width: 0.9em; height: 0.9em; }
   .ffx-search { width: 100%; }
+}
+@media screen and (max-width: 359px) {
+  .ffx-grid { grid-template-columns: 1fr; }
+  .ffx-grid__cell:nth-child(even) { transform: none; }
 }
 
 /* ------------------------------ Concert history ------------------------------ */
