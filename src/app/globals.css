@@ -1,26 +1,335 @@
 @import "tailwindcss";
 
+/* FlowFest Signature Fonts */
+@font-face {
+  font-family: 'Sugar Peachy';
+  src: url('/fonts/SugarPeachy-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sugar Peachy';
+  src: url('/fonts/SugarPeachy-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sugar Peachy';
+  src: url('/fonts/SugarPeachy-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* FlowFest Direct Color Scheme */
+  --color-light: #f3ecd2;
+  --color-light-plus: #fffefb;
+  --color-dark: #121212;
+  --color-mango: #f3a20f;
+  --color-yellow: #f0bb0d;
+  --color-orange: #f97028;
+  --color-pink: #f489a3;
+  --color-primary: var(--color-pink);
+
+  --font-heading: 'Sugar Peachy', system-ui, sans-serif;
+  --font-body: 'Quicksand', system-ui, sans-serif;
+
+  --background: #07070a;
+  --foreground: #f3f4f6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom noise grain overlay for Awwwards texture */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Lenis smooth scrolling rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Awwwards Editorial Outline Stroke Text */
+.text-stroke {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.18);
+  color: transparent;
+  transition: all 0.5s ease;
+}
+
+.text-stroke:hover {
+  -webkit-text-stroke: 1.5px #f3a20f;
+  color: rgba(243, 162, 15, 0.05);
+}
+
+.text-stroke-gold {
+  -webkit-text-stroke: 1px rgba(243, 162, 15, 0.6);
+  color: transparent;
+}
+
+/* Glassmorphism & Surface Tokens */
+.glass-card {
+  background: rgba(16, 16, 24, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+}
+
+.glass-card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  border-color: rgba(243, 162, 15, 0.35);
+  box-shadow: 0 0 35px -5px rgba(243, 162, 15, 0.15), 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+  transform: translateY(-3px);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #ffffff 15%, #fcd34d 50%, #f3a20f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aurora-bg {
+  background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.18) 0%, rgba(243, 162, 15, 0.10) 35%, rgba(7, 7, 10, 0) 70%);
+}
+
+.stage-light-gold {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(243, 162, 15, 0.18) 0%, rgba(243, 162, 15, 0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.stage-light-purple {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.16) 0%, rgba(139, 92, 246, 0) 70%);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #07070a;
+}
+::-webkit-scrollbar-thumb {
+  background: #23232c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f3a20f;
+}
+
+/* 21st.dev / MagicUI / Aceternity Keyframes */
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-border-beam {
+  animation: border-beam var(--duration) infinite linear;
 }
+
+@keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+  }
+}
+@keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+  }
+  15%, 35% {
+    transform: translateZ(0) rotate(90deg);
+  }
+  65%, 85% {
+    transform: translateZ(0) rotate(270deg);
+  }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+  }
+}
+.animate-shimmer-slide {
+  animation: shimmer-slide var(--speed) ease-in-out infinite alternate;
+}
+.animate-spin-around {
+  animation: spin-around calc(var(--speed) * 2) infinite linear;
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
+}
+.animate-meteor-effect {
+  animation: meteor 5s linear infinite;
+}
+
+/* FlowFest Signature Headline & Typography */
+body {
+  background-color: #F3ECD2;
+  color: #121212;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+}
+
+.welcome__h1 {
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.15em 0.28em;
+  color: #121212;
+  text-align: center;
+  font-size: clamp(2.4rem, 6.2vw, 5.8rem);
+  line-height: 0.95;
+  position: relative;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.welcome__h1 > span {
+  position: relative;
+  display: inline-block;
+  transform: rotate(0.001deg);
+}
+
+.welcome__h1 > span > span {
+  color: transparent;
+  user-select: none;
+  font-family: 'Sugar Peachy', sans-serif;
+  font-weight: 900;
+  display: inline-block;
+}
+
+.welcome__h1 > span > svg {
+  position: absolute;
+  width: calc(100% + 0.32em);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -52%);
+}
+
+.welcome__h1 > span > svg:nth-child(1) {
+  top: calc(50% + 0.08em);
+  opacity: 0.25;
+  filter: drop-shadow(0 4px 0px rgba(18, 18, 18, 0.25));
+}
+
+.welcome__h1 > span > svg:nth-child(2) {
+  top: calc(50% + 0em);
+}
+
+.welcome__h2-box-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.welcome__h2-box {
+  background-color: #F3A20F;
+  border: 3px solid #121212;
+  border-radius: 14px;
+  transform: rotate(-3.5deg);
+  box-shadow: 0 8px 0px rgba(0, 0, 0, 0.22);
+  padding: 0.35em 1.25em;
+  border: 3.5px solid #121212;
+  border-radius: 20px;
+  transform: rotate(-3deg);
+  box-shadow: 0 9px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.42em 1.6em;
+  transition: transform 0.25s ease;
+}
+
+.welcome__h2-box:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.welcome__h2 {
+  font-family: 'Sugar Peachy', sans-serif;
+  color: #FFFFFF;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1;
+  font-size: clamp(2.3rem, 5.2vw, 4.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
